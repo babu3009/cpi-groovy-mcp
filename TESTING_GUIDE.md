@@ -1,5 +1,11 @@
 # Testing Guide for SAP Groovy MCP Server
 
+## Credits / Attribution
+
+- Groovy examples and repository structure are based on Fatih Pense's work: https://github.com/pizug/cpi-groovy-examples
+- The MCP server implementation is created by babu3009: https://github.com/babu3009/cpi-groovy-mcp
+- Workspace/contact: https://www.linkedin.com/in/isaiyavan/
+
 ## Quick Start Testing
 
 ### Option 1: Run the Test Script (Recommended)
@@ -7,17 +13,18 @@
 The easiest way to test all functionality:
 
 ```bash
-# Activate your conda environment
+# (Optional) activate your conda environment
 conda activate cpimcp
 
 # Navigate to the project directory
-cd c:\Code\sap\cpi-groovy-examples.worktrees\copilot-worktree-2026-01-13T12-40-20
+cd c:\Code\sap\cpi-groovy-examples
 
 # Run the test script
 python test_server.py
 ```
 
 **Expected Output:**
+
 ```
 === Testing SAP Groovy MCP Server ===
 
@@ -57,15 +64,15 @@ from mcp_server import SAPGroovyMCPServer
 
 async def test():
     server = SAPGroovyMCPServer()
-    
+
     # Test listing examples
     result = await server.list_examples()
     print(result[0].text)
-    
+
     # Test getting an example
     result = await server.get_example("basic")
     print(result[0].text)
-    
+
     # Test search
     result = await server.search_examples("XML")
     print(result[0].text)
@@ -90,16 +97,18 @@ The server will wait for JSON-RPC messages on stdin. You can send MCP protocol m
 ### Testing with Claude Desktop
 
 1. **Locate Claude Desktop config file:**
+
    - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
    - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 
 2. **Add the MCP server configuration:**
+
    ```json
    {
      "mcpServers": {
        "sap-groovy": {
          "command": "C:\\ProgramData\\miniforge3\\envs\\cpimcp\\python.exe",
-         "args": ["c:\\Code\\sap\\cpi-groovy-examples.worktrees\\copilot-worktree-2026-01-13T12-40-20\\mcp_server.py"]
+         "args": ["c:\\Code\\sap\\cpi-groovy-examples\\mcp_server.py"]
        }
      }
    }
@@ -127,6 +136,7 @@ mcp-inspector python mcp_server.py
 ```
 
 This opens a web UI where you can:
+
 - View available resources
 - Test all tools interactively
 - See request/response logs
@@ -135,6 +145,7 @@ This opens a web UI where you can:
 ## Verification Checklist
 
 ### ✅ Basic Functionality
+
 - [ ] Server starts without errors
 - [ ] Lists all 16+ Groovy examples
 - [ ] Retrieves individual examples
@@ -143,12 +154,14 @@ This opens a web UI where you can:
 - [ ] Comparison shows differences
 
 ### ✅ Resources
+
 - [ ] `list_resources()` returns all example resources
 - [ ] `read_resource()` retrieves script content
 - [ ] `read_resource()` retrieves README content
 - [ ] `read_resource()` retrieves metadata
 
 ### ✅ Tools
+
 - [ ] `list_examples` - Lists all examples
 - [ ] `list_examples` with tag filter works
 - [ ] `get_example` - Retrieves complete example
@@ -157,11 +170,13 @@ This opens a web UI where you can:
 - [ ] `compare_examples` - Compares two examples
 
 ### ✅ Error Handling
+
 - [ ] Invalid example name returns error
 - [ ] Invalid resource URI returns error
 - [ ] Missing files handled gracefully
 
 ### ✅ Performance
+
 - [ ] Server starts in < 1 second
 - [ ] Example discovery completes quickly
 - [ ] No memory leaks during repeated calls
@@ -171,6 +186,7 @@ This opens a web UI where you can:
 ### Issue: "Module not found: mcp"
 
 **Solution:**
+
 ```bash
 pip install mcp pyyaml
 ```
@@ -178,12 +194,14 @@ pip install mcp pyyaml
 ### Issue: "Python not found"
 
 **Solution:**
+
 - Activate conda environment: `conda activate cpimcp`
 - Or use full path: `C:\ProgramData\miniforge3\envs\cpimcp\python.exe`
 
 ### Issue: "No examples found"
 
 **Solution:**
+
 - Ensure you're in the correct directory
 - Verify `script.groovy` files exist in subdirectories
 - Check file permissions
@@ -191,6 +209,7 @@ pip install mcp pyyaml
 ### Issue: Claude Desktop doesn't show the server
 
 **Solution:**
+
 1. Check config file syntax (valid JSON)
 2. Use absolute paths in configuration
 3. Restart Claude Desktop completely
@@ -207,17 +226,17 @@ from mcp_server import SAPGroovyMCPServer
 
 async def benchmark():
     server = SAPGroovyMCPServer()
-    
+
     # Time listing examples
     start = time.time()
     await server.list_examples()
     print(f"List examples: {time.time() - start:.3f}s")
-    
+
     # Time getting an example
     start = time.time()
     await server.get_example("basic")
     print(f"Get example: {time.time() - start:.3f}s")
-    
+
     # Time search
     start = time.time()
     await server.search_examples("Message")
@@ -234,12 +253,12 @@ from mcp_server import SAPGroovyMCPServer
 
 async def load_test():
     server = SAPGroovyMCPServer()
-    
+
     # Run 100 concurrent requests
     tasks = []
     for i in range(100):
         tasks.append(server.list_examples())
-    
+
     results = await asyncio.gather(*tasks)
     print(f"Completed 100 requests: {len(results)} responses")
 
@@ -256,7 +275,7 @@ from mcp_server import SAPGroovyMCPServer
 
 async def test_protocol():
     server = SAPGroovyMCPServer()
-    
+
     # Test tool list
     tools = await server.server.list_tools()
     assert len(tools) == 5
@@ -264,7 +283,7 @@ async def test_protocol():
         assert tool.name
         assert tool.description
         assert tool.inputSchema
-    
+
     print("✅ Protocol compliance verified")
 
 asyncio.run(test_protocol())
@@ -306,18 +325,21 @@ Document your test results:
 # Test Run: [Date]
 
 ## Environment
+
 - Python: [version]
 - MCP SDK: [version]
 - OS: [Windows/macOS/Linux]
 
 ## Results
+
 - ✅ All tools working
 - ✅ Resources accessible
 - ✅ Error handling correct
-- ⚠️  Performance issue: [describe]
+- ⚠️ Performance issue: [describe]
 - ❌ Bug found: [describe]
 
 ## Notes
+
 [Any observations or issues]
 ```
 
@@ -334,6 +356,7 @@ If tests fail:
 ## Summary
 
 ✅ **Recommended Testing Flow:**
+
 1. Run `python test_server.py` for quick validation
 2. Test integration with Claude Desktop
 3. Try example queries in production

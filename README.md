@@ -21,6 +21,14 @@ You can [create a new issue](https://github.com/pizug/cpi-groovy-examples/issues
 
 If you can create good documentation for scripts, that is great. If you don't have the time, don't worry, we will improve it together over time.
 
+# MCP Server (AI tooling)
+
+This workspace also includes an MCP server for browsing/searching these examples.
+
+- Base Groovy examples/repo: https://github.com/pizug/cpi-groovy-examples (Fatih Pense)
+- MCP implementation: https://github.com/babu3009/cpi-groovy-mcp (babu3009)
+- Workspace/contact: https://www.linkedin.com/in/isaiyavan/
+
 # License
 
 - Imported SAP Java APIs for CPI are property of SAP.
