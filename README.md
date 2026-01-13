@@ -4,14 +4,14 @@ Groovy scripting is an integral and important feature of SAP Cloud Integration (
 
 The goals of this repository are:
 
-- Providing templates when you are implementing a new script
-- Easily finding Groovy functions related to the CPI topic at hand
-- Minimizing search engine time for common tasks
-- Providing educational content for beginners
+- Providing reusable Groovy script templates for SAP Cloud Integration (CPI) / SAP Integration Suite (SAP IS)
+- Making common integration tasks easy to find (headers/properties, transformations, logging, error handling, connectivity)
+- Including runnable-style fixtures (input/expected files) where applicable to speed up testing and validation
+- Enabling fast discovery via documentation + MCP tooling (browse, search, analyze, compare examples)
 
 Script examples are provided with context, explanation, and input/output examples.
 
-You can see the examples in a more visual format on [pizug.com/cpi-groovy-examples](https://pizug.com/cpi-groovy-examples)
+You can see the examples in a more visual format on [pizug.com/cpi-groovy-examples](https://pizug.com/cpi-groovy-examples) (base code author Fatih Pense)
 
 # MCP Server (AI tooling)
 
