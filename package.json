@@ -1,0 +1,27 @@
+{
+  "name": "sap-groovy-mcp",
+  "version": "0.1.0",
+  "description": "MCP Server for SAP Cloud Integration Groovy Script Examples",
+  "author": "SAP CPI Community",
+  "license": "MIT",
+  "main": "mcp_server.py",
+  "keywords": [
+    "mcp",
+    "sap",
+    "cpi",
+    "groovy",
+    "cloud-integration"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pizug/cpi-groovy-examples"
+  }
+<<<<<<< Updated upstream
+}
+=======
+<<<<<<< Updated upstream
+}
+=======
+}
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
